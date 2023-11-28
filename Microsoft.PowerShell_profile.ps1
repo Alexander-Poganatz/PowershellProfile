@@ -13,4 +13,4 @@ function Glimpse-File {
     Get-Content $FileName -TotalCount $RowCount | foreach { if ($_.Length -le $ColW) { $_ } else { $_.SubString(0, $ColW)}  }
 }
 
-
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\onehalf.minimal.omp.json" | Invoke-Expression
