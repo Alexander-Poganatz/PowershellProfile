@@ -19,4 +19,6 @@ Function Git-WordDiff { git diff --word-diff=color $args }
 
 Function Git-Log { git log -n 10 --reverse --oneline $args }
 
+Function Git-PushUpstreamOrigin { git push -u origin (Get-BranchName) }
+
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\reimagined-octo-sniffle.minimal.omp.json" | Invoke-Expression
