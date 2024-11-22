@@ -21,4 +21,28 @@ Function Git-Log { git log -n 10 --reverse --oneline $args }
 
 Function Git-PushUpstreamOrigin { git push -u origin (Get-BranchName) }
 
+Function Git-SwitchInteractive {
+    $a = git branch -l | Where-Object { $_ -NotLike "``*`` *" }
+    if ($? -NE $True) {
+        return
+    }
+    if ($a.Length -EQ 0) {
+        Write-Host "No other branches, exiting"
+        return
+    }
+    if ($a -is [string]) {
+        $a = @($a)
+    }
+    $a | ForEach-Object {$counter = 0} { Write-Host "$counter -$_" } { ++$counter } -End $null
+    $index = Read-Host "Please select an index"
+    $branch = $a[$index]
+    if ($?) {
+        if ($branch -eq $null) {
+            Write-Host "Invalid index. Aborting."
+        } else {
+            git switch $branch.Trim()
+        }
+    }    
+}
+
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\reimagined-octo-sniffle.minimal.omp.json" | Invoke-Expression
