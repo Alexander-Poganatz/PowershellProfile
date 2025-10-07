@@ -47,4 +47,9 @@ Function Git-SwitchInteractive {
 
 Function Git-PullRebase { git pull --rebase $args }
 
+Function cc {
+    Set-Clipboard -Value $null
+    Write-Host "Cleared Clipboard"
+}
+
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\reimagined-octo-sniffle.minimal.omp.json" | Invoke-Expression
